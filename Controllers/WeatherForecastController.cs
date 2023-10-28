@@ -28,8 +28,22 @@ public class WeatherForecastController : ControllerBase
         _firstService = firstService;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
+    [HttpGet]
     public IActionResult Get()
+    {
+        _logger.LogInformation("Hello from logger\n");
+        _logger.LogInformation($"Transient: {_transientOp.OperationId}\n");
+        _logger.LogInformation($"Scoped: {_scopedOp.OperationId}\n");
+        _logger.LogInformation($"Singleton: {_singletonOp.OperationId}\n");
+
+        _firstService.GenerateResult();
+
+        return Ok();
+    }
+
+    [HttpGet]
+    [Route("GetAll")]
+    public IActionResult GetAll()
     {
         _logger.LogInformation("Hello from logger\n");
         _logger.LogInformation($"Transient: {_transientOp.OperationId}\n");
