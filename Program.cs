@@ -1,3 +1,6 @@
+using DIApp.Services;
+using DIApp.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IOperationTransient, Operation>();
+builder.Services.AddTransient<IOperationSingleton, Operation>();
+builder.Services.AddTransient<IOperationScoped, Operation>();
+ 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
