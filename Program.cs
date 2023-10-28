@@ -11,8 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IOperationTransient, Operation>();
-builder.Services.AddTransient<IOperationSingleton, Operation>();
-builder.Services.AddTransient<IOperationScoped, Operation>();
+builder.Services.AddSingleton<IOperationSingleton, Operation>();
+builder.Services.AddScoped<IOperationScoped, Operation>();
+
+builder.Services.AddTransient<FirstService, FirstService>();
  
 var app = builder.Build();
 
